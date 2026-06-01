@@ -96,10 +96,14 @@ body {
 }
 
 .letter-image {
-    width: min(72%, 250px);
-    max-height: clamp(5rem, 22vh, 12.5rem);
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(45%, 140px);
+    max-height: clamp(3rem, 12vh, 5.5rem);
     object-fit: contain;
-    margin: clamp(4px, 1vh, 10px) 0;
+    object-position: center;
+    margin: clamp(2px, 0.5vh, 6px) 0;
 }
 
 .letter-caption {
@@ -133,7 +137,8 @@ body {
     }
 
     .letter-image {
-        max-height: clamp(3rem, 28vh, 6rem);
+        max-width: min(40%, 120px);
+        max-height: clamp(2.5rem, 18vh, 4.5rem);
     }
 
     .letter-caption {
