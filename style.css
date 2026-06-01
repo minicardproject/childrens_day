@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 body {
     margin: 0;
     min-height: 100dvh;
@@ -21,6 +26,8 @@ body {
 #envelope-container {
     text-align: center;
     cursor: pointer;
+    width: min(100%, 360px);
+    padding: 0 clamp(8px, 3vw, 16px);
 }
 
 @keyframes pulse {
@@ -55,15 +62,24 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: clamp(0.5rem, 2vh, 1.25rem);
+    gap: clamp(0.35rem, 1.5vh, 1rem);
     width: 100%;
+    max-height: 100dvh;
     padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right))
         max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+    overflow-x: hidden;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 
     opacity: 0;
     transform: scale(0.96);
     transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+#letter-title,
+.letter-caption {
+    width: 100%;
+    max-width: min(94vw, 720px);
 }
 
 #letter-container.open {
@@ -81,8 +97,10 @@ body {
 .image-frame {
     position: relative;
     display: inline-block;
-    max-width: min(96vw, 640px);
-    padding: clamp(12px, 2.5vw, 20px);
+    width: fit-content;
+    max-width: min(94vw, 640px);
+    margin-inline: auto;
+    padding: clamp(8px, 2.5vw, 20px);
     background:
         radial-gradient(circle at 12% 18%, #ffb8d2 3px, transparent 3.5px),
         radial-gradient(circle at 88% 22%, #ffc9e0 3px, transparent 3.5px),
@@ -127,12 +145,12 @@ body {
     display: block;
     width: 100%;
     height: auto;
-    max-width: min(calc(96vw - 2.5rem), 580px);
-    max-height: min(74dvh, 680px);
+    max-width: min(calc(94vw - 2.5rem), 580px);
+    max-height: min(52dvh, calc(100dvh - 11rem), 680px);
     object-fit: contain;
     object-position: center;
     border-radius: clamp(10px, 2vw, 16px);
-    border: 3px solid #fff;
+    border: clamp(2px, 0.6vw, 3px) solid #fff;
     box-shadow: 0 4px 14px rgba(255, 140, 180, 0.2);
 }
 
@@ -143,31 +161,72 @@ body {
     max-width: 90%;
 }
 
+@media (max-width: 480px) {
+    #envelope {
+        width: min(180px, 62vw);
+    }
+
+    #letter-title {
+        font-size: clamp(0.9rem, 4.8vw, 1.35rem);
+    }
+
+    .image-frame {
+        max-width: min(92vw, 640px);
+        border-width: 3px;
+    }
+
+    .letter-image {
+        max-width: min(calc(92vw - 2rem), 580px);
+        max-height: min(46dvh, calc(100dvh - 12rem), 680px);
+    }
+
+    .letter-caption {
+        font-size: clamp(0.9rem, 4.2vw, 1.35rem);
+    }
+
+    #letter-container:not(.open) {
+        transform: scale(0.98);
+    }
+}
+
+@media (max-height: 700px) {
+    #letter-container {
+        justify-content: flex-start;
+        padding-top: max(12px, env(safe-area-inset-top));
+    }
+
+    .letter-image {
+        max-height: min(40dvh, calc(100dvh - 10rem), 520px);
+    }
+}
+
 @media (max-height: 500px) and (orientation: landscape) {
     #letter-container {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         align-content: center;
-        gap: clamp(0.5rem, 2vw, 1rem);
+        gap: clamp(0.35rem, 1.5vh, 0.75rem);
+        padding-block: max(6px, env(safe-area-inset-top)) max(6px, env(safe-area-inset-bottom));
     }
 
     #letter-title {
         flex: 1 1 100%;
-        font-size: clamp(0.85rem, 3vh, 1.25rem);
+        font-size: clamp(0.8rem, 3vh, 1.15rem);
     }
 
     .image-frame {
-        max-width: min(58vw, 460px);
+        max-width: min(52vw, 460px);
+        padding: clamp(6px, 1.5vw, 12px);
     }
 
     .letter-image {
-        max-width: min(calc(58vw - 2.5rem), 420px);
-        max-height: min(74dvh, 400px);
+        max-width: min(calc(52vw - 2rem), 420px);
+        max-height: min(58dvh, calc(100dvh - 5rem), 380px);
     }
 
     .letter-caption {
         flex: 1 1 100%;
-        font-size: clamp(0.85rem, 3vh, 1.25rem);
+        font-size: clamp(0.8rem, 2.8vh, 1.1rem);
     }
 }
