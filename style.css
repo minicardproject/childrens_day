@@ -99,8 +99,8 @@ body {
     display: block;
     width: auto;
     height: auto;
-    max-width: min(90%, 280px);
-    max-height: clamp(6rem, 24vh, 11rem);
+    max-width: min(95%, 400px);
+    max-height: clamp(8rem, 32vh, 15rem);
     object-fit: contain;
     object-position: center;
     margin: clamp(4px, 1vh, 10px) 0;
@@ -137,8 +137,8 @@ body {
     }
 
     .letter-image {
-        max-width: min(80%, 240px);
-        max-height: clamp(5rem, 36vh, 9rem);
+        max-width: min(90%, 340px);
+        max-height: clamp(7rem, 42vh, 13rem);
     }
 
     .letter-caption {
